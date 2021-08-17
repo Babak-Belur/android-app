@@ -12,5 +12,37 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
+
+    <style name="Theme.StudiAry.TextHeadline1">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Theme.StudiAry.TextHeadline2" parent="Theme.StudiAry.TextHeadline1">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.StudiAry.TextHeadline1.Bold">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="Theme.StudiAry.TextHeadline2.Bold">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="Theme.StudiAry.TextBody1">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_500</item>
+    </style>
+
+    <style name="Theme.StudiAry.TextBody2" parent="Theme.StudiAry.TextBody1">
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>
