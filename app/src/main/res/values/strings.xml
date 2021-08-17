@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">StudiAry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_pre_test">Pre-Test</string>
+    <string name="done">DONE</string>
+    <string name="label_welcome_back">Welcome Back</string>
+    <string name="label_sign_in_to_continue">Sign in to continue</string>
+    <string name="hint_email">example@gmail.com</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="label_don_t_have_an_account">Don\'t have an account?</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="hallo">Hallo!</string>
+    <string name="label_sign_up_to_continue">Sign Up to continue</string>
+    <string name="hint_name">Your Name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="hi">Hi!</string>
+    <string name="this_is_your_study_target_list">This is your study target list</string>
+    <string name="_0">0</string>
+    <string name="label_days">days</string>
 </resources>
