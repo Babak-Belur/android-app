@@ -1,4 +1,4 @@
-package com.babakbelur.studiary.core.data.network
+package com.babakbelur.studiary.core.data.remote.network
 
 sealed class ApiResponse<out R> {
     data class Success<out T>(val data: T) : ApiResponse<T>()
