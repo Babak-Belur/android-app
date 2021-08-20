@@ -19,4 +19,16 @@
     <string name="this_is_your_study_target_list">This is your study target list</string>
     <string name="_0">0</string>
     <string name="label_days">days</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="label_create_new_target">Create New Target</string>
+    <string name="hint_subject">Subject</string>
+    <string name="hint_description">Description</string>
+    <string name="label_target_finish">Target Finish</string>
+    <string name="label_target_score">Target Score</string>
+    <string name="submit">Submit</string>
+    <string name="label_your_target">Your Target</string>
+    <string name="label_predicted_score">Predicted Score</string>
+    <string name="evaluation">Evaluation</string>
+    <string name="study_time_week">Study Time / Week</string>
+    <string name="label_free_time_week">Free Time / Week</string>
 </resources>
