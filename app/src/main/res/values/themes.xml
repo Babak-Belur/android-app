@@ -45,4 +45,8 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="Theme.StudiAry.TextBody1.Bold">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
 </resources>
