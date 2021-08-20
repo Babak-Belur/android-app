@@ -1,14 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_500"
     tools:context=".presentation.ui.detail.DetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/label_your_target"
+        style="@style/Theme.StudiAry.TextHeadline1.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_your_target"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_top_rounded_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_your_target" />
+
+    <TextView
+        android:id="@+id/label_subject"
+        style="@style/Theme.StudiAry.TextBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/hint_subject"
+        android:textColor="@color/gray_500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view" />
+
+    <TextView
+        android:id="@+id/tv_subject"
+        style="@style/Theme.StudiAry.TextHeadline2.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/label_subject"
+        app:layout_constraintTop_toBottomOf="@id/label_subject"
+        tools:text="Math" />
+
+    <TextView
+        android:id="@+id/label_description"
+        style="@style/Theme.StudiAry.TextBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/hint_description"
+        android:textColor="@color/gray_500"
+        app:layout_constraintStart_toStartOf="@id/label_subject"
+        app:layout_constraintTop_toBottomOf="@id/tv_subject" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        style="@style/Theme.StudiAry.TextHeadline2.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/label_description"
+        app:layout_constraintTop_toBottomOf="@id/label_description"
+        tools:text="Description" />
+
+    <TextView
+        android:id="@+id/label_target_finish"
+        style="@style/Theme.StudiAry.TextBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/label_target_finish"
+        android:textColor="@color/gray_500"
+        app:layout_constraintStart_toStartOf="@id/label_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        style="@style/Theme.StudiAry.TextHeadline2.Bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/label_target_finish"
+        app:layout_constraintTop_toBottomOf="@id/label_target_finish"
+        tools:text="10 Feb 2020" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_dashboard"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_decor"
+        android:layout_width="10dp"
+        android:layout_height="0dp"
+        app:cardBackgroundColor="@color/purple_500"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/card_dashboard"
+        app:layout_constraintStart_toStartOf="@id/card_dashboard"
+        app:layout_constraintTop_toTopOf="@id/card_dashboard" />
+
+    <TextView
+        android:id="@+id/label_predicted_score"
+        style="@style/Theme.StudiAry.TextHeadline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:elevation="16dp"
+        android:text="@string/label_predicted_score"
+        app:layout_constraintEnd_toStartOf="@+id/label_target_score"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/card_dashboard"
+        app:layout_constraintTop_toTopOf="@id/card_dashboard" />
+
+    <TextView
+        android:id="@+id/label_target_score"
+        style="@style/Theme.StudiAry.TextHeadline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:elevation="16dp"
+        android:text="@string/label_target_score"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/card_dashboard"
+        app:layout_constraintStart_toEndOf="@+id/label_predicted_score"
+        app:layout_constraintTop_toTopOf="@id/card_dashboard" />
+
+    <TextView
+        android:id="@+id/tv_predicted_score"
+        style="@style/Theme.StudiAry.TextHeadline1.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        android:text="@string/_0"
+        android:textColor="@color/purple_500"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/card_dashboard"
+        app:layout_constraintEnd_toEndOf="@id/label_predicted_score"
+        app:layout_constraintStart_toStartOf="@id/label_predicted_score"
+        app:layout_constraintTop_toBottomOf="@id/label_predicted_score" />
+
+    <TextView
+        android:id="@+id/tv_target_score"
+        style="@style/Theme.StudiAry.TextHeadline1.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        android:text="@string/_0"
+        android:textColor="@color/purple_500"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/card_dashboard"
+        app:layout_constraintEnd_toEndOf="@id/label_target_score"
+        app:layout_constraintStart_toStartOf="@id/label_target_score"
+        app:layout_constraintTop_toBottomOf="@id/label_target_score" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_eval"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/evaluation"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
