@@ -25,6 +25,7 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
     private val viewModel: AddTargetViewModel by viewModels()
 
     private var totalDays: Int = 0
+    private var targetScore: Int = 0
     private var currentDay: String = ""
     private var selectedDay: String = ""
 
@@ -39,6 +40,8 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
         selectDate()
 
         setInitialDate()
+
+        selectTargetScore()
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
@@ -55,7 +58,11 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
     }
 
     private fun setInitialDate() {
-        binding.tvDate.text = calendar.time.ddMMMMyFormat()
+        if (selectedDay.isEmpty()) {
+            binding.tvDate.text = calendar.time.ddMMMMyFormat()
+        } else {
+            binding.tvDate.text = selectedDay
+        }
         currentDay = calendar.time.ddMMMMyyyyFormat()
     }
 
@@ -68,6 +75,12 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
         val diffDays = difference / (24 * 60 * 60 * 1000)
         totalDays = diffDays.toInt()
         Log.i("Test", "Total Days: $totalDays")
+    }
+
+    private fun selectTargetScore() {
+        val score = binding.etTargetScore.text.toString()
+        targetScore = score.toInt()
+        Log.i("Test", "Target Score: $targetScore")
     }
 
     private fun selectDate() {

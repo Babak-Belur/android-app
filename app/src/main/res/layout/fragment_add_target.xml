@@ -116,12 +116,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_date" />
 
-    <TextView
-        android:id="@+id/tv_target_score"
+    <EditText
+        android:id="@+id/et_target_score"
         style="@style/Theme.StudiAry.TextHeadline1.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:hint="@string/_0"
+        android:inputType="number"
         android:text="@string/_0"
         android:textColor="@color/purple_500"
         android:textSize="30sp"
