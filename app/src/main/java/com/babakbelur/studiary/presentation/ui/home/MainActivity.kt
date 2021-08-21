@@ -6,7 +6,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.babakbelur.studiary.R
 import com.babakbelur.studiary.databinding.ActivityMainBinding
 import com.babakbelur.studiary.presentation.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private lateinit var navHostController: NavController
@@ -20,6 +22,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navHostController = navHostFragment.navController
-
     }
 }
