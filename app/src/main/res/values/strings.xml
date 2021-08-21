@@ -31,4 +31,5 @@
     <string name="evaluation">Evaluation</string>
     <string name="study_time_week">Study Time / Week</string>
     <string name="label_free_time_week">Free Time / Week</string>
+    <string name="add_target">Add Target</string>
 </resources>
