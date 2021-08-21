@@ -28,12 +28,13 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
 
     private fun navigateToSignUpFragment() {
         binding.tvCreateAccount.setOnClickListener {
-            childFragmentManager.beginTransaction().apply {
+            parentFragmentManager.beginTransaction().apply {
                 replace(
                     R.id.login_container,
                     SignUpFragment.newInstance(),
                     SignUpFragment::class.java.simpleName
                 )
+                addToBackStack(SignInFragment::class.java.simpleName)
                 commit()
             }
         }
