@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.babakbelur.studiary.core.domain.model.RangeTime
 import com.babakbelur.studiary.databinding.ItemHorizontalButtonBinding
 
-class HorizontalButtonAdapter : BaseAdapter<RangeTime, ItemHorizontalButtonBinding>(
+open class StudyTimeAdapter : BaseAdapter<RangeTime, ItemHorizontalButtonBinding>(
     ItemHorizontalButtonBinding::inflate,
     diffCallback
 ) {
@@ -31,3 +31,5 @@ class HorizontalButtonAdapter : BaseAdapter<RangeTime, ItemHorizontalButtonBindi
         }
     }
 }
+
+class FreeTimeAdapter: StudyTimeAdapter()
