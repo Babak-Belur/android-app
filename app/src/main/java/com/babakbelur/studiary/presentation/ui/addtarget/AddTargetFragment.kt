@@ -54,7 +54,7 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
         }
         selectedDay = stringBuilder.toString().ddMMMMyyyyFormat()
         binding.tvDate.text = stringBuilder.toString().ddMMMMyFormat()
-        calculateTotalDays()
+        totalDays = viewModel.calculateTotalDays(currentDay, selectedDay)
     }
 
     private fun setInitialDate() {
@@ -64,17 +64,6 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
             binding.tvDate.text = selectedDay
         }
         currentDay = calendar.time.ddMMMMyyyyFormat()
-    }
-
-    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    private fun calculateTotalDays() {
-        val sdf = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
-        val currentDate = sdf.parse(currentDay)
-        val selectedDate = sdf.parse(selectedDay)
-        val difference = abs(currentDate.time - selectedDate.time)
-        val diffDays = difference / (24 * 60 * 60 * 1000)
-        totalDays = diffDays.toInt()
-        Log.i("Test", "Total Days: $totalDays")
     }
 
     private fun selectTargetScore() {
