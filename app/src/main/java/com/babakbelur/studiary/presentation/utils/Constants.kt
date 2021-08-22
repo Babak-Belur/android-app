@@ -1,5 +1,6 @@
 package com.babakbelur.studiary.presentation.utils
 
+import com.babakbelur.studiary.core.domain.model.RangeTime
 import com.babakbelur.studiary.core.domain.model.TestQuestion
 
 object Constants {
@@ -18,11 +19,11 @@ object Constants {
             answerC = "6",
             answerD = "7"
         ),TestQuestion(
-            question = "3. Nilai x yang memenuhi 8^(3x+1)=128^(x-1) adalah...",
-            answerA = "-10",
-            answerB = "-5",
-            answerC = "-2",
-            answerD = "2"
+            question = "3. Diketahui barisan aritmatika dengan U_5=17 dan U_10=32. Suku ke-20 adalah…",
+            answerA = "57",
+            answerB = "62",
+            answerC = "67",
+            answerD = "72"
         ),TestQuestion(
             question = "4. Rumus umum dari barisan bilangan -8,0,8,16,… adalah…",
             answerA = "Un = 2n",
@@ -66,5 +67,20 @@ object Constants {
             answerC = "12,5",
             answerD = "13"
         ),
+    )
+
+    val STUDY_TIME_CATEGORIES = listOf(
+        RangeTime("<2 Hours", 1),
+        RangeTime("2-5 Hours", 2),
+        RangeTime("5-10 Hours", 3),
+        RangeTime(">10 Hours", 4),
+    )
+
+    val FREE_TIME_CATEGORIES = listOf(
+        RangeTime("<2 Hours", 1),
+        RangeTime("2-5 Hours", 2),
+        RangeTime("5-8 Hours", 3),
+        RangeTime("8-15 Hours", 4),
+        RangeTime(">15 Hours", 5),
     )
 }
