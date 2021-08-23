@@ -2,6 +2,7 @@ package com.babakbelur.studiary.presentation.ui.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.babakbelur.studiary.databinding.FragmentEvaluationBinding
 import com.babakbelur.studiary.presentation.adapter.FreeTimeAdapter
@@ -17,9 +18,13 @@ class EvaluationFragment :
 
     private val evaluationAdapter: TestQuestionAdapter by lazy { TestQuestionAdapter() }
 
+    private val viewModel: DetailViewModel by viewModels()
+
     private val studyTimeAdapter: StudyTimeAdapter by lazy { StudyTimeAdapter() }
 
     private val freeTimeAdapter: FreeTimeAdapter by lazy { FreeTimeAdapter() }
+
+    private var score: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,6 +33,26 @@ class EvaluationFragment :
 
         fetchValueAdapter()
 
+        observeEvaluationScore()
+
+        handleItemButtonClicked()
+    }
+
+    private fun observeEvaluationScore() {
+        viewModel.calculatePreTestScore(evaluationAdapter)
+        viewModel.evalScore.observe(viewLifecycleOwner) {
+            score = it
+        }
+    }
+
+    private fun handleItemButtonClicked() {
+        studyTimeAdapter.onItemClick = { rangeTime ->
+
+        }
+
+        freeTimeAdapter.onItemClick = { rangeTime ->
+
+        }
     }
 
     private fun initRv() {
