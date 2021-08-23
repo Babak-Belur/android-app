@@ -7,6 +7,8 @@ import com.babakbelur.studiary.databinding.ItemQuestionBinding
 class TestQuestionAdapter :
     BaseAdapter<TestQuestion, ItemQuestionBinding>(ItemQuestionBinding::inflate, diffCallback) {
 
+    var onRadioButtonCheckedListener: ((Int, Int) -> Unit)? = null
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val dataItem = getItem(position)
         val binding = ItemQuestionBinding.bind(holder.itemView)
@@ -16,6 +18,11 @@ class TestQuestionAdapter :
             rbAnswerB.text = dataItem.answerB
             rbAnswerC.text = dataItem.answerC
             rbAnswerD.text = dataItem.answerD
+
+            radioGroup.setOnCheckedChangeListener { _, checkedId ->
+                onRadioButtonCheckedListener?.invoke(checkedId, position)
+            }
+
         }
     }
 
