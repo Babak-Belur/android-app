@@ -13,10 +13,8 @@ import com.babakbelur.studiary.presentation.base.BaseFragment
 import com.babakbelur.studiary.presentation.utils.ddMMMMyFormat
 import com.babakbelur.studiary.presentation.utils.ddMMMMyyyyFormat
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTargetBinding::inflate),
