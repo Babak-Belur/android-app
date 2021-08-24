@@ -1,45 +1,77 @@
 package com.babakbelur.studiary.core.data.remote.network
 
-import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationResponse
-import com.babakbelur.studiary.core.data.remote.response.factor.FactorResponse
-import com.babakbelur.studiary.core.data.remote.response.studyreport.StudyReportResponse
-import com.babakbelur.studiary.core.data.remote.response.target.TargetResponse
-import com.babakbelur.studiary.core.data.remote.response.user.UserResponse
-import retrofit2.http.GET
-import retrofit2.http.Path
+import com.babakbelur.studiary.core.data.remote.response.BaseAddResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseDeleteResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseResponse
+import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
+import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
+import com.babakbelur.studiary.core.data.remote.response.target.TargetItemResponse
+import com.babakbelur.studiary.core.data.remote.response.user.DataLoginResponse
+import com.babakbelur.studiary.core.data.remote.response.user.DataUserResponse
+import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("users/{id}")
-    suspend fun getUserById(
-        @Path("id") userId: Int
-    ): UserResponse
+    //Endpoint User
+    @POST("login")
+    suspend fun signIn(
+        @Body() user: DataUserResponse
+    ): BaseResponse<DataLoginResponse>
 
-    /*@POST("users")
+    @POST("users")
     suspend fun signUp(
-        @Body name: String,
-        @Body username: String,
-        @Body password: String,
-        @Body role: String
-    )*/
+        @Body() user: DataUserResponse
+    ): BaseResponse<DataUserResponse>
 
+
+    //Endpoint Target
     @GET("target/{id}")
     suspend fun getTargetById(
         @Path("id") userId: Int
-    ): TargetResponse
+    ): BaseResponse<TargetItemResponse>
 
-    @GET("factor/{id}")
-    suspend fun getFactorById(
-        @Path("id") userId: Int
-    ): FactorResponse
+    @POST("target")
+    suspend fun addTarget(
+        @Body target: TargetItemResponse
+    ): BaseAddResponse<TargetItemResponse>
 
-    @GET("study/{id}")
-    suspend fun getStudyReportById(
-        @Path("id") userId: Int
-    ): StudyReportResponse
+    @DELETE("target/{id}")
+    suspend fun deleteTarget(
+        @Path("id") idUser: Int
+    ): BaseDeleteResponse
 
-    @GET("evaluation/{id}")
+
+    //Endpoint Evaluation
+    @GET("evaluation/user/{id}")
     suspend fun getEvaluationById(
         @Path("id") userId: Int
-    ): EvaluationResponse
+    ): BaseResponse<EvaluationItemResponse>
+
+    @POST("evaluation")
+    suspend fun addEvaluation(
+        @Body evaluation: EvaluationItemResponse
+    ): BaseAddResponse<EvaluationItemResponse>
+
+    @DELETE("evaluation/{id}")
+    suspend fun deleteEvaluation(
+        @Path("id") idUser: Int
+    ): BaseDeleteResponse
+
+
+    //Endpoint Course
+    @GET("course/{id}")
+    suspend fun getCourseById(
+        @Path("id") idCourse: Int
+    ): BaseResponse<CourseItemResponse>
+
+    @POST("course")
+    suspend fun addCourse(
+        @Body course: CourseItemResponse
+    ): BaseAddResponse<CourseItemResponse>
+
+    @DELETE("course/{id}")
+    suspend fun deleteCourse(
+        @Path("id") idCourse: Int
+    ): BaseDeleteResponse
+
 }

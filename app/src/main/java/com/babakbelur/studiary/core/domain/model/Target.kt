@@ -1,7 +1,5 @@
 package com.babakbelur.studiary.core.domain.model
 
-import com.babakbelur.studiary.core.data.remote.response.target.TargetResponse
-
 data class Target(
     val idUser: Int = 0,
     val name: String? = null,

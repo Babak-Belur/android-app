@@ -7,14 +7,14 @@ data class DataTargetResponse(
     val idUser: Int = 0,
 
     @SerializedName("name")
-    val name: String? = null,
+    val name: String? = "",
 
     @SerializedName("role")
-    val role: String? = null,
+    val role: String? = "",
 
     @SerializedName("target")
-    val targetResponse: List<TargetResponse>,
+    val target: List<TargetItemResponse>,
 
     @SerializedName("username")
-    val username: String? = null
+    val username: String? = ""
 )

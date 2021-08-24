@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class DataEvaluationResponse(
     @SerializedName("evaluation")
-    val evaluationItemResponse: List<EvaluationItemResponse>,
+    val evaluation: List<EvaluationItemResponse> = emptyList(),
 
     @SerializedName("id_user")
     val idUser: Int = 0,
 
     @SerializedName("name")
-    val name: String? = null,
+    val name: String? = "",
 
     @SerializedName("role")
-    val role: String? = null,
+    val role: String? = "",
 
     @SerializedName("username")
-    val username: String? = null
+    val username: String? = ""
 )
