@@ -77,4 +77,7 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // Circle Image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
