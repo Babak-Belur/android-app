@@ -9,44 +9,63 @@
         android:id="@+id/homeFragment"
         android:name="com.babakbelur.studiary.presentation.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_addTargetFragment"
-            app:destination="@id/addTargetFragment" />
+            app:destination="@id/addTargetFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.babakbelur.studiary.presentation.ui.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <action
             android:id="@+id/action_detailFragment_to_evaluationFragment"
-            app:destination="@id/evaluationFragment" />
+            app:destination="@id/evaluationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/preTestFragment"
         android:name="com.babakbelur.studiary.presentation.ui.addtarget.PreTestFragment"
         android:label="fragment_pre_test"
-        tools:layout="@layout/fragment_pre_test" >
+        tools:layout="@layout/fragment_pre_test">
         <action
-            android:id="@+id/action_preTestFragment_to_detailFragment"
-            app:destination="@id/detailFragment"
-            app:popUpTo="@id/detailFragment"
+            android:id="@+id/action_preTestFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_in_left"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/evaluationFragment"
         android:name="com.babakbelur.studiary.presentation.ui.detail.EvaluationFragment"
         android:label="fragment_evaluation"
-        tools:layout="@layout/fragment_evaluation" >
+        tools:layout="@layout/fragment_evaluation">
         <action
             android:id="@+id/action_evaluationFragment_to_detailFragment"
             app:destination="@id/detailFragment"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_in_left"
             app:popUpTo="@id/detailFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/addTargetFragment"
@@ -55,6 +74,10 @@
         tools:layout="@layout/fragment_add_target">
         <action
             android:id="@+id/action_addTargetFragment_to_preTestFragment"
-            app:destination="@id/preTestFragment" />
+            app:destination="@id/preTestFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 </navigation>
