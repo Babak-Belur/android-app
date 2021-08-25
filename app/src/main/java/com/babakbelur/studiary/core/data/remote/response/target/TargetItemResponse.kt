@@ -23,5 +23,8 @@ data class TargetItemResponse(
     val idTarget: Int = 0,
 
     @SerializedName("target_time")
-    val targetTime: String? = ""
+    val targetTime: String? = "",
+
+    @SerializedName("id_user")
+    val idUser: Int = 0
 )

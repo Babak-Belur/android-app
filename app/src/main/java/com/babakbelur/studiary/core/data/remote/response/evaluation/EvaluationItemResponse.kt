@@ -14,10 +14,10 @@ data class EvaluationItemResponse(
     val grade: Int = 0,
 
     @SerializedName("id_evaluation")
-    val idEvaluation: Int,
+    val idEvaluation: Int = 0,
 
     @SerializedName("study_time")
-    val studyTime: String,
+    val studyTime: String? = "",
 
     @SerializedName("target")
     val target: List<TargetItemResponse>

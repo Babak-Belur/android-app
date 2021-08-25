@@ -1,7 +1,7 @@
 package com.babakbelur.studiary.core.domain.model
 
 data class Evaluation(
-    val evaluationItemResponse: List<EvaluationItem>,
+    val evaluation: List<EvaluationItem>,
     val idUser: Int = 0,
     val name: String? = null,
     val role: String? = null,
@@ -9,8 +9,10 @@ data class Evaluation(
 )
 
 data class EvaluationItem(
+    val date: String? = "",
+    val freeTime: String? = "",
+    val studyTime: String? = "",
     val grade: Int = 0,
-    val idCourse: Int = 0,
     val idEvaluation: Int = 0,
-    val idUser: Int = 0
+    val target: List<TargetItem> = emptyList()
 )
