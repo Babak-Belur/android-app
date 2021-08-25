@@ -5,7 +5,9 @@ import com.babakbelur.studiary.core.data.remote.response.BaseDeleteResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseResponse
 import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
 import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
+import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
 import com.babakbelur.studiary.core.data.remote.response.target.TargetItemResponse
+import com.babakbelur.studiary.core.data.remote.response.target.TargetResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataLoginResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataUserResponse
 import retrofit2.http.*
@@ -15,20 +17,25 @@ interface ApiService {
     //Endpoint User
     @POST("login")
     suspend fun signIn(
-        @Body() user: DataUserResponse
+        @Body user: DataUserResponse
     ): BaseResponse<DataLoginResponse>
 
     @POST("users")
     suspend fun signUp(
-        @Body() user: DataUserResponse
+        @Body user: DataUserResponse
     ): BaseResponse<DataUserResponse>
 
 
     //Endpoint Target
     @GET("target/{id}")
-    suspend fun getTargetById(
+    suspend fun getTargetByUserId(
         @Path("id") userId: Int
-    ): BaseResponse<TargetItemResponse>
+    ): BaseResponse<DataTargetResponse>
+
+    @GET("target/{id}")
+    suspend fun getTargetByIdTarget(
+        @Path("id") targetId: Int
+    ): TargetResponse
 
     @POST("target")
     suspend fun addTarget(
@@ -54,7 +61,7 @@ interface ApiService {
 
     @DELETE("evaluation/{id}")
     suspend fun deleteEvaluation(
-        @Path("id") idUser: Int
+        @Path("id") idEvaluation: Int
     ): BaseDeleteResponse
 
 
