@@ -1,11 +1,82 @@
 package com.babakbelur.studiary.core.utils
 
+import com.babakbelur.studiary.core.data.ResultState
+import com.babakbelur.studiary.core.data.remote.response.BaseAddResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseResponse
 import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
 import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
+import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
 import com.babakbelur.studiary.core.data.remote.response.target.TargetItemResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataLoginResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataUserResponse
 import com.babakbelur.studiary.core.domain.model.*
+import com.babakbelur.studiary.core.domain.model.Target
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+
+@ExperimentalCoroutinesApi
+object Mapper {
+
+    suspend inline fun <T : Any> mapResultToData(resultState: ResultState<T>): ResultState<T>? =
+        suspendCancellableCoroutine { task ->
+            resultState.onSuccess {
+                val data = ResultState.Success(it)
+                try {
+                    task.resume(data)
+                } catch (e: Throwable) {
+                    e.printStackTrace()
+                    task.resume(null)
+                }
+            }
+        }
+
+    inline fun <T : Any, U : Any> mapResult(
+        resultState: ResultState<out T>,
+        mapper: T.() -> U
+    ): ResultState<U> {
+        return when (resultState) {
+            is ResultState.Success -> {
+                val data = resultState.data
+                val mapData = mapper.invoke(data)
+                ResultState.Success(mapData)
+            }
+            is ResultState.Idle -> ResultState.Idle()
+            is ResultState.Error -> ResultState.Error(resultState.throwable)
+            is ResultState.Loading -> ResultState.Loading()
+        }
+    }
+}
+
+fun BaseResponse<DataLoginResponse>.toBaseResponseOfUser(): BaseResponse<User> {
+    return BaseResponse(this.data.toUser())
+}
+
+fun BaseResponse<DataLoginResponse>.toResultModelOfUser(): ResultModel<User> {
+    return ResultModel(this.data.toUser())
+}
+
+fun BaseAddResponse<DataUserResponse>.toBaseResponseOfListUserItem(): BaseAddResponse<UserItem> {
+    return BaseAddResponse(this.data.toListUser())
+}
+
+fun BaseResponse<DataTargetResponse>.toResultModelOfTarget(): ResultModel<Target> {
+    return ResultModel(this.data.toTarget())
+}
+
+fun DataTargetResponse.toTarget() = Target(
+    idUser = this.idUser,
+    name = this.name,
+    role = this.role,
+    target = this.target?.toListTargetItem(),
+    username = this.username
+)
+
+fun DataLoginResponse.toUser() = User(
+    accessToken = this.accessToken,
+    user = this.data?.toListUser(),
+    refreshToken = this.refreshToken
+)
 
 fun UserItem.toDataUserResponse() = DataUserResponse(
     idUser = this.idUser,
@@ -30,13 +101,8 @@ fun TargetItemResponse.toTargetItem() = TargetItem(
     idCourse = this.idCourse,
     course = this.course.toListCourse(),
     targetTime = this.targetTime,
-    idTarget = this.idTarget
-)
-
-fun DataLoginResponse.toUser() = User(
-    accessToken = this.accessToken,
-    user = this.data.toListUser(),
-    refreshToken = this.refreshToken
+    idTarget = this.idTarget,
+    idUser = this.idUser
 )
 
 fun TargetItem.toTargetItemResponse() = TargetItemResponse(
