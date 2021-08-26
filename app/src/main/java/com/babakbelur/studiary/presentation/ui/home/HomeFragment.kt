@@ -1,16 +1,23 @@
 package com.babakbelur.studiary.presentation.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.babakbelur.studiary.R
 import com.babakbelur.studiary.core.data.ResultState
+import com.babakbelur.studiary.core.utils.onFailure
+import com.babakbelur.studiary.core.utils.onSuccess
 import com.babakbelur.studiary.databinding.FragmentHomeBinding
 import com.babakbelur.studiary.presentation.adapter.TargetAdapter
 import com.babakbelur.studiary.presentation.base.BaseFragment
+import com.babakbelur.studiary.presentation.ui.home.MainActivity.Companion.EXTRA_NAME
+import com.babakbelur.studiary.presentation.ui.home.MainActivity.Companion.EXTRA_USER_ID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +27,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private var idUser: Int? = null
+    private var userId: Int? = 0
+    private var name: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +37,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         addNewTarget()
 
-        //observeAllTarget()
+        getIdUserFromIntent()
+
+        observeAllTarget()
 
         navigateToDetailTarget()
     }
@@ -39,16 +49,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         layoutManager = LinearLayoutManager(requireActivity())
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun getIdUserFromIntent() {
+        userId = requireActivity().intent.extras?.getInt(EXTRA_USER_ID)
+        name = requireActivity().intent.extras?.getString(EXTRA_NAME)
+        binding.tvHiName.text = "Hi, $name!"
+    }
+
     private fun observeAllTarget() {
-        viewModel.getTargetByIdUser(1).observe(viewLifecycleOwner) { resultState ->
-            when (resultState) {
-                is ResultState.Error -> Toast.makeText(requireActivity(), "Something Wrong", Toast.LENGTH_SHORT).show()
-                is ResultState.Loading -> Unit
-                is ResultState.Success -> {
-                    targetAdapter.submitList(resultState.data)
+        viewModel.getAllTargetsUser(userId!!)
+        viewModel.listTarget.observe(viewLifecycleOwner) { result ->
+            val isLoading = result is ResultState.Loading
+            val isSuccess = result is ResultState.Success
+
+            binding.pbHome.isVisible = isLoading
+
+            binding.rvTarget.isVisible = isSuccess
+            result.onSuccess { resultData ->
+                val isListTargetNullOrEmpty = resultData.data.target.isNullOrEmpty()
+                if (isListTargetNullOrEmpty) {
+                    Toast.makeText(requireActivity(), "Empty", Toast.LENGTH_SHORT).show()
+                } else {
+                    val listTarget = resultData.data.target
+                    targetAdapter.submitList(listTarget)
                 }
             }
 
+            result.onFailure { throwable ->
+                Toast.makeText(requireActivity(), throwable.message, Toast.LENGTH_SHORT).show()
+                Log.e(HomeFragment::class.simpleName, throwable.message.toString())
+            }
         }
     }
 
