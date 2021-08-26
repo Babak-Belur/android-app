@@ -1,7 +1,8 @@
 package com.babakbelur.studiary.core.data
 
-sealed class ResultState<T>(val data: T?, val message: String? = null) {
-    class Success<T>(data: T?) : ResultState<T>(data)
-    class Loading<T>(data: T? = null) : ResultState<T>(data)
-    class Error<T>(data: T? = null, message: String) : ResultState<T>(data, message)
+sealed class ResultState<T : Any> {
+    class Loading<T : Any> : ResultState<T>()
+    class Idle<T : Any> : ResultState<T>()
+    data class Success<T: Any>(val data: T) : ResultState<T>()
+    data class Error<T : Any>(val throwable: Throwable) : ResultState<T>()
 }
