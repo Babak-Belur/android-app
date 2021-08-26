@@ -32,4 +32,9 @@
     <string name="study_time_week">Study Time / Week</string>
     <string name="label_free_time_week">Free Time / Week</string>
     <string name="add_target">Add Target</string>
+    <string name="error_login">Username/Password Invalid</string>
+    <string name="success_login">Login Successful</string>
+    <string name="hint_username">Username</string>
+    <string name="success_sign_up">Sign Up Successful</string>
+    <string name="error_sign_up">Sign Up Failed</string>
 </resources>
