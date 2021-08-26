@@ -2,9 +2,7 @@ package com.babakbelur.studiary.presentation.ui.detail
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.babakbelur.studiary.R
-import com.babakbelur.studiary.core.domain.model.EvaluationItem
 import com.babakbelur.studiary.core.domain.usecase.IAppUseCase
 import com.babakbelur.studiary.presentation.adapter.TestQuestionAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -63,10 +61,6 @@ class DetailViewModel @Inject constructor(private val useCase: IAppUseCase) : Vi
             }
         }
     }
-
-    fun getTargetById(idUser: Int) = useCase.getTargetByUserId(idUser).asLiveData()
-
-    fun addEvaluation(evaluation: EvaluationItem) = useCase.addEvaluation(evaluation).asLiveData()
 
 
 }
