@@ -12,7 +12,9 @@ class TargetAdapter : BaseAdapter<TargetItem, ItemTargetBinding>(
         val target = getItem(position)
         val binding = ItemTargetBinding.bind(holder.itemView)
         with(binding) {
-            tvTotalDays.text = target.targetTime.toString()
+            tvTotalDays.text = target.targetTime
+            tvSubjects.text = target.course[0].courseName
+            tvDescription.text = target.course[0].description
         }
     }
 
