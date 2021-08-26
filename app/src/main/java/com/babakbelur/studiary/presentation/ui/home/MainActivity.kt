@@ -23,4 +23,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navHostController = navHostFragment.navController
     }
+
+    companion object {
+        const val EXTRA_USER_ID = "userId"
+        const val EXTRA_NAME = "name"
+    }
 }
