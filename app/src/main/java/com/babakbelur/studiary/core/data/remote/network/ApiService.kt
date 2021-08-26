@@ -10,24 +10,31 @@ import com.babakbelur.studiary.core.data.remote.response.target.TargetItemRespon
 import com.babakbelur.studiary.core.data.remote.response.target.TargetResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataLoginResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataUserResponse
+import com.babakbelur.studiary.core.utils.Constants
 import retrofit2.http.*
 
 interface ApiService {
 
     //Endpoint User
+    @FormUrlEncoded
     @POST("login")
-    suspend fun signIn(
-        @Body user: DataUserResponse
+    suspend fun signInRequest(
+        @Field("username") username: String,
+        @Field("password") password: String
     ): BaseResponse<DataLoginResponse>
 
+    @FormUrlEncoded
     @POST("users")
-    suspend fun signUp(
-        @Body user: DataUserResponse
-    ): BaseResponse<DataUserResponse>
+    suspend fun signUpRequest(
+        @Field("name") name: String,
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("role") role: String = Constants.ADMIN
+    ): BaseAddResponse<DataUserResponse>
 
 
     //Endpoint Target
-    @GET("target/{id}")
+    @GET("target/user/{id}")
     suspend fun getTargetByUserId(
         @Path("id") userId: Int
     ): BaseResponse<DataTargetResponse>
