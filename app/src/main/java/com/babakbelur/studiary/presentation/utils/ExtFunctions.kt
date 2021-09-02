@@ -32,3 +32,13 @@ fun String.ddMMMMyyyyFormat(): String {
         outputFormat.format(date)
     }
 }
+
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+fun String.yyyymmddFormat(): String {
+    return if (this.isEmpty()) this else {
+        val inputFormat = SimpleDateFormat("dd MMMM y", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-mm-dd", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        outputFormat.format(date)
+    }
+}
