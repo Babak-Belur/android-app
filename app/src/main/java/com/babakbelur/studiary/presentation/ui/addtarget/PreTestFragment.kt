@@ -1,11 +1,18 @@
 package com.babakbelur.studiary.presentation.ui.addtarget
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.babakbelur.studiary.R
+import com.babakbelur.studiary.core.data.ResultState
+import com.babakbelur.studiary.core.utils.onFailure
+import com.babakbelur.studiary.core.utils.onSuccess
 import com.babakbelur.studiary.databinding.FragmentPreTestBinding
 import com.babakbelur.studiary.presentation.adapter.TestQuestionAdapter
 import com.babakbelur.studiary.presentation.base.BaseFragment
@@ -21,12 +28,14 @@ class PreTestFragment : BaseFragment<FragmentPreTestBinding>(FragmentPreTestBind
 
     private var score = 0
 
+    private val args: PreTestFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRv()
         fetchQuestion()
         observeScore()
-        navigateToHome()
+        submitTarget()
     }
 
     private fun observeScore() {
@@ -36,9 +45,34 @@ class PreTestFragment : BaseFragment<FragmentPreTestBinding>(FragmentPreTestBind
         }
     }
 
-    private fun navigateToHome() {
+    private fun submitTarget() {
         binding.btnDone.setOnClickListener {
-            findNavController().navigate(R.id.action_preTestFragment_to_homeFragment)
+            viewModel.addTarget(
+                args.userId,
+                args.courseId,
+                score,
+                args.targetScore,
+                args.targetTime
+            )
+            viewModel.addTarget.observe(viewLifecycleOwner) { result ->
+                val isLoading = result is ResultState.Loading
+
+                binding.pbSubmitTarget.isVisible = isLoading
+
+                result.onSuccess {
+                    findNavController().navigate(R.id.action_preTestFragment_to_homeFragment)
+                }
+
+                result.onFailure {
+                    Toast.makeText(
+                        requireActivity(),
+                        getString(R.string.error_add_target),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e(PreTestFragment::class.simpleName, it.message.toString())
+                }
+
+            }
         }
     }
 
@@ -50,4 +84,11 @@ class PreTestFragment : BaseFragment<FragmentPreTestBinding>(FragmentPreTestBind
     private fun fetchQuestion() {
         testAdapter.submitList(LIST_QUESTIONS)
     }
+
+    companion object {
+        const val ARG_TARGET_TIME = "targetTime"
+        const val ARG_TARGET_SCORE = "targetScore"
+        const val ARG_COURSE_ID = "courseId"
+    }
+
 }
