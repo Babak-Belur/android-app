@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/bg_decor_view.xml" value="0.22685185185185186" />
+        <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/bg_decor_view_purple.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/bg_et_rounded_black_border.xml" value="0.1" />
+        <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/bg_rounded_purple.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/bg_top_rounded_white.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/ic_calendar.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/ic_email.xml" value="0.13148148148148148" />
@@ -12,7 +14,7 @@
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/drawable/ic_user_profile.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/activity_login.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/activity_main.xml" value="0.18614130434782608" />
-        <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/fragment_add_target.xml" value="0.20652173913043478" />
+        <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/fragment_add_target.xml" value="0.264" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/fragment_daily_report.xml" value="0.12386018237082067" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/fragment_detail.xml" value="0.2" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/fragment_evaluation.xml" value="0.2" />
@@ -24,6 +26,7 @@
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/item_pre_test.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/item_question.xml" value="0.20652173913043478" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/item_study_time.xml" value="0.264" />
+        <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/item_subject_course.xml" value="0.2546875" />
         <entry key="..\:/Users/RASYIDIN/AndroidStudioProjects/AndroidProject/StudiAry/app/src/main/res/layout/item_target.xml" value="0.264" />
       </map>
     </option>
