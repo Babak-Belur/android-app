@@ -16,6 +16,8 @@ import com.babakbelur.studiary.core.utils.onSuccess
 import com.babakbelur.studiary.databinding.FragmentHomeBinding
 import com.babakbelur.studiary.presentation.adapter.TargetAdapter
 import com.babakbelur.studiary.presentation.base.BaseFragment
+import com.babakbelur.studiary.presentation.ui.addtarget.AddTargetFragment.Companion.ARG_USER_ID
+import com.babakbelur.studiary.presentation.ui.detail.DetailFragment.Companion.ARG_TARGET_ID
 import com.babakbelur.studiary.presentation.ui.home.MainActivity.Companion.EXTRA_NAME
 import com.babakbelur.studiary.presentation.ui.home.MainActivity.Companion.EXTRA_USER_ID
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,9 +37,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         initRv()
 
-        addNewTarget()
-
         getIdUserFromIntent()
+
+        addNewTarget()
 
         observeAllTarget()
 
@@ -68,8 +70,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             result.onSuccess { resultData ->
                 val isListTargetNullOrEmpty = resultData.data.target.isNullOrEmpty()
                 if (isListTargetNullOrEmpty) {
-                    Toast.makeText(requireActivity(), "Empty", Toast.LENGTH_SHORT).show()
+                    binding.lottieEmpty.isVisible = true
                 } else {
+                    binding.lottieEmpty.isVisible = false
                     val listTarget = resultData.data.target
                     targetAdapter.submitList(listTarget)
                 }
@@ -84,13 +87,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun navigateToDetailTarget() {
         targetAdapter.onItemClick = { targetItem ->
-            findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+            Bundle().run {
+                putInt(ARG_TARGET_ID, targetItem.idTarget)
+                findNavController().navigate(R.id.action_homeFragment_to_detailFragment, this)
+            }
         }
     }
 
     private fun addNewTarget() {
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_addTargetFragment)
+            Bundle().run {
+                putInt(ARG_USER_ID, userId!!)
+                findNavController().navigate(R.id.action_homeFragment_to_addTargetFragment, this)
+            }
         }
     }
 
