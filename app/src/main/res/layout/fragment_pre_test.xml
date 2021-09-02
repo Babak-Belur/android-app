@@ -12,9 +12,7 @@
         android:layout_height="100dp"
         android:background="@drawable/bg_decor_view_purple"
         android:fitsSystemWindows="true"
-        app:elevation="0dp">
-
-    </com.google.android.material.appbar.AppBarLayout>
+        app:elevation="0dp"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -66,5 +64,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_submit_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

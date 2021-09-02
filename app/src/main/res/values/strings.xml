@@ -21,7 +21,7 @@
     <string name="label_days">days</string>
     <string name="sign_up">Sign Up</string>
     <string name="label_create_new_target">Create New Target</string>
-    <string name="hint_subject">Subject</string>
+    <string name="hint_subject">Course</string>
     <string name="hint_description">Description</string>
     <string name="label_target_finish">Target Finish</string>
     <string name="label_target_score">Target Score</string>
@@ -37,4 +37,10 @@
     <string name="hint_username">Username</string>
     <string name="success_sign_up">Sign Up Successful</string>
     <string name="error_sign_up">Sign Up Failed</string>
+    <string name="error">Something Wrong!</string>
+    <string name="error_subject">Choose your course first!</string>
+    <string name="error_target_score">Score cannot be nol or empty!</string>
+    <string name="error_description">Description Cannot Be Empty</string>
+    <string name="label_select_course">Select Course</string>
+    <string name="error_add_target">Failed to Submit!</string>
 </resources>
