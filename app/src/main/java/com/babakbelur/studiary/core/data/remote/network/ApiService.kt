@@ -2,9 +2,11 @@ package com.babakbelur.studiary.core.data.remote.network
 
 import com.babakbelur.studiary.core.data.remote.response.BaseAddResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseDeleteResponse
-import com.babakbelur.studiary.core.data.remote.response.BaseResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseListResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseObjectResponse
 import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
 import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
+import com.babakbelur.studiary.core.data.remote.response.predict.PredictResponse
 import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
 import com.babakbelur.studiary.core.data.remote.response.target.TargetItemResponse
 import com.babakbelur.studiary.core.data.remote.response.target.TargetResponse
@@ -21,7 +23,7 @@ interface ApiService {
     suspend fun signInRequest(
         @Field("username") username: String,
         @Field("password") password: String
-    ): BaseResponse<DataLoginResponse>
+    ): BaseObjectResponse<DataLoginResponse>
 
     @FormUrlEncoded
     @POST("users")
@@ -37,16 +39,22 @@ interface ApiService {
     @GET("target/user/{id}")
     suspend fun getTargetByUserId(
         @Path("id") userId: Int
-    ): BaseResponse<DataTargetResponse>
+    ): BaseObjectResponse<DataTargetResponse>
 
     @GET("target/{id}")
     suspend fun getTargetByIdTarget(
         @Path("id") targetId: Int
     ): TargetResponse
 
+    @FormUrlEncoded
     @POST("target")
     suspend fun addTarget(
-        @Body target: TargetItemResponse
+        @Field("id_user") userId: Int,
+        @Field("id_course") courseId: Int,
+        @Field("g1") preTestScore: Int,
+        @Field("grade_target") targetScore: Int,
+        @Field("target_time") targetTime: String,
+        @Field("achived") achieved: Int = 0
     ): BaseAddResponse<TargetItemResponse>
 
     @DELETE("target/{id}")
@@ -55,11 +63,18 @@ interface ApiService {
     ): BaseDeleteResponse
 
 
+    //Endpoint Predict Score
+    @GET("predict/{id}")
+    suspend fun getPredictedScore(
+        @Path("id") evaluationId: Int
+    ): BaseListResponse<PredictResponse>
+
+
     //Endpoint Evaluation
     @GET("evaluation/user/{id}")
     suspend fun getEvaluationById(
         @Path("id") userId: Int
-    ): BaseResponse<EvaluationItemResponse>
+    ): BaseObjectResponse<EvaluationItemResponse>
 
     @POST("evaluation")
     suspend fun addEvaluation(
@@ -73,14 +88,18 @@ interface ApiService {
 
 
     //Endpoint Course
+    @GET("course")
+    suspend fun getAllCourses(): BaseListResponse<CourseItemResponse>
+
     @GET("course/{id}")
     suspend fun getCourseById(
         @Path("id") idCourse: Int
-    ): BaseResponse<CourseItemResponse>
+    ): BaseObjectResponse<CourseItemResponse>
 
     @POST("course")
     suspend fun addCourse(
-        @Body course: CourseItemResponse
+        @Field("course_name") subject: String,
+        @Field("description") description: String
     ): BaseAddResponse<CourseItemResponse>
 
     @DELETE("course/{id}")

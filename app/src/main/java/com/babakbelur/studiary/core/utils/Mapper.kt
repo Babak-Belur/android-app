@@ -2,11 +2,14 @@ package com.babakbelur.studiary.core.utils
 
 import com.babakbelur.studiary.core.data.ResultState
 import com.babakbelur.studiary.core.data.remote.response.BaseAddResponse
-import com.babakbelur.studiary.core.data.remote.response.BaseResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseListResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseObjectResponse
 import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
 import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
+import com.babakbelur.studiary.core.data.remote.response.predict.PredictResponse
 import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
 import com.babakbelur.studiary.core.data.remote.response.target.TargetItemResponse
+import com.babakbelur.studiary.core.data.remote.response.target.TargetResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataLoginResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataUserResponse
 import com.babakbelur.studiary.core.domain.model.*
@@ -48,33 +51,59 @@ object Mapper {
     }
 }
 
-fun BaseResponse<DataLoginResponse>.toBaseResponseOfUser(): BaseResponse<User> {
-    return BaseResponse(this.data.toUser())
+fun BaseObjectResponse<DataLoginResponse>.toBaseResponseOfUser(): BaseObjectResponse<User> {
+    return BaseObjectResponse(this.data.toUser())
 }
 
-fun BaseResponse<DataLoginResponse>.toResultModelOfUser(): ResultModel<User> {
+fun BaseObjectResponse<DataLoginResponse>.toResultModelOfUser(): ResultModel<User> {
     return ResultModel(this.data.toUser())
 }
 
-fun BaseAddResponse<DataUserResponse>.toBaseResponseOfListUserItem(): BaseAddResponse<UserItem> {
-    return BaseAddResponse(this.data.toListUser())
+fun BaseAddResponse<DataUserResponse>.toResultAddModelOfListUserItem(): ResultAddModel<UserItem> {
+    return ResultAddModel(this.data.toListUser())
 }
 
-fun BaseResponse<DataTargetResponse>.toResultModelOfTarget(): ResultModel<Target> {
+fun BaseAddResponse<TargetItemResponse>.toResultAddModelOfListTargetItem(): ResultAddModel<TargetItem> {
+    return ResultAddModel(this.data.toListTargetItem())
+}
+
+fun BaseAddResponse<CourseItemResponse>.toResultAddModelOfListCourse(): ResultAddModel<Course> {
+    return ResultAddModel(this.data.toListCourse())
+}
+
+fun BaseListResponse<PredictResponse>.toResultListModelOfPredict(): ResultListModel<Predict> {
+    return ResultListModel(this.data.toListPredict())
+}
+
+fun BaseListResponse<CourseItemResponse>.toResultListModelOfCourse(): ResultListModel<Course> {
+    return ResultListModel(this.data.toListCourse())
+}
+
+fun BaseObjectResponse<DataTargetResponse>.toResultModelOfTarget(): ResultModel<Target> {
     return ResultModel(this.data.toTarget())
 }
+
+fun PredictResponse.toPredict() = Predict(
+    freeTime = this.freeTime,
+    preTestScore = this.preTestScore,
+    grade = this.grade,
+    predictedScore = this.predictedScore,
+    studyTime = this.studyTime
+)
+
+fun TargetResponse.toResultTarget() = ResultTarget(data.toListTargetItem())
 
 fun DataTargetResponse.toTarget() = Target(
     idUser = this.idUser,
     name = this.name,
     role = this.role,
-    target = this.target?.toListTargetItem(),
+    target = this.target.toListTargetItem(),
     username = this.username
 )
 
 fun DataLoginResponse.toUser() = User(
     accessToken = this.accessToken,
-    user = this.data?.toListUser(),
+    user = this.data.toListUser(),
     refreshToken = this.refreshToken
 )
 
@@ -96,7 +125,7 @@ fun DataUserResponse.toUserItem() = UserItem(
 
 fun TargetItemResponse.toTargetItem() = TargetItem(
     achieved = this.achieved,
-    g1 = this.g1,
+    preTestScore = this.preTestScore,
     gradeTarget = this.gradeTarget,
     idCourse = this.idCourse,
     course = this.course.toListCourse(),
@@ -107,7 +136,7 @@ fun TargetItemResponse.toTargetItem() = TargetItem(
 
 fun TargetItem.toTargetItemResponse() = TargetItemResponse(
     achieved = this.achieved,
-    g1 = this.g1,
+    preTestScore = this.preTestScore,
     course = this.course.toListCourseItemResponse(),
     gradeTarget = this.gradeTarget,
     idCourse = this.idCourse,
@@ -152,6 +181,21 @@ fun List<EvaluationItemResponse>.toListEvaluationItem(): List<EvaluationItem> {
     return data
 }
 
+fun List<PredictResponse>.toListPredict(): List<Predict> {
+    val data = ArrayList<Predict>()
+    this.map {
+        val predict = Predict(
+            freeTime = it.freeTime,
+            preTestScore = it.preTestScore,
+            grade = it.grade,
+            predictedScore = it.predictedScore,
+            studyTime = it.studyTime
+        )
+        data.add(predict)
+    }
+    return data
+}
+
 fun List<Course>.toListCourseItemResponse(): List<CourseItemResponse> {
     val data = ArrayList<CourseItemResponse>()
     this.map {
@@ -170,7 +214,7 @@ fun List<TargetItem>.toListTargetItemResponse(): List<TargetItemResponse> {
     this.map {
         val targetItem = TargetItemResponse(
             achieved = it.achieved,
-            g1 = it.g1,
+            preTestScore = it.preTestScore,
             course = it.course.toListCourseItemResponse(),
             gradeTarget = it.gradeTarget,
             idCourse = it.idCourse,
@@ -187,7 +231,7 @@ fun List<TargetItemResponse>.toListTargetItem(): List<TargetItem> {
     this.map {
         val targetItem = TargetItem(
             achieved = it.achieved,
-            g1 = it.g1,
+            preTestScore = it.preTestScore,
             course = it.course.toListCourse(),
             gradeTarget = it.gradeTarget,
             idCourse = it.idCourse,

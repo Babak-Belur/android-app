@@ -11,7 +11,7 @@ data class TargetItemResponse(
     val course: List<CourseItemResponse> = emptyList(),
 
     @SerializedName("g1")
-    val g1: Int = 0,
+    val preTestScore: Int = 0,
 
     @SerializedName("grade_target")
     val gradeTarget: Int = 0,

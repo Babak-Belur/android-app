@@ -10,7 +10,7 @@ data class Target(
 
 data class TargetItem(
     val achieved: Int = 0,
-    val g1: Int = 0,
+    val preTestScore: Int = 0,
     val course: List<Course> = emptyList(),
     val gradeTarget: Int = 0,
     val idCourse: Int = 0,

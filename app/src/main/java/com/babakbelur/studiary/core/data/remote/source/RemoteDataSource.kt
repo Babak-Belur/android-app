@@ -2,8 +2,13 @@ package com.babakbelur.studiary.core.data.remote.source
 
 import com.babakbelur.studiary.core.data.remote.network.ApiService
 import com.babakbelur.studiary.core.data.remote.response.BaseAddResponse
-import com.babakbelur.studiary.core.data.remote.response.BaseResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseListResponse
+import com.babakbelur.studiary.core.data.remote.response.BaseObjectResponse
+import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
+import com.babakbelur.studiary.core.data.remote.response.predict.PredictResponse
 import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
+import com.babakbelur.studiary.core.data.remote.response.target.TargetItemResponse
+import com.babakbelur.studiary.core.data.remote.response.target.TargetResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataLoginResponse
 import com.babakbelur.studiary.core.data.remote.response.user.DataUserResponse
 import javax.inject.Inject
@@ -13,7 +18,7 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) :
     override suspend fun signInRequest(
         username: String,
         password: String
-    ): BaseResponse<DataLoginResponse> {
+    ): BaseObjectResponse<DataLoginResponse> {
         return apiService.signInRequest(username, password)
     }
 
@@ -25,7 +30,42 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) :
         return apiService.signUpRequest(name, username, password)
     }
 
-    override suspend fun getAllTargetsUser(userId: Int): BaseResponse<DataTargetResponse> {
+    override suspend fun getAllTargetsUser(userId: Int): BaseObjectResponse<DataTargetResponse> {
         return apiService.getTargetByUserId(userId)
+    }
+
+    override suspend fun getDetailTarget(targetId: Int): TargetResponse {
+        return apiService.getTargetByIdTarget(targetId)
+    }
+
+    override suspend fun getPredictedScore(evaluationId: Int): BaseListResponse<PredictResponse> {
+        return apiService.getPredictedScore(evaluationId)
+    }
+
+    override suspend fun addTarget(
+        userId: Int,
+        courseId: Int,
+        preTestScore: Int,
+        targetScore: Int,
+        targetTime: String,
+    ): BaseAddResponse<TargetItemResponse> {
+        return apiService.addTarget(
+            userId,
+            courseId,
+            preTestScore,
+            targetScore,
+            targetTime,
+        )
+    }
+
+    override suspend fun getAllCourses(): BaseListResponse<CourseItemResponse> {
+        return apiService.getAllCourses()
+    }
+
+    override suspend fun addCourse(
+        subject: String,
+        description: String
+    ): BaseAddResponse<CourseItemResponse> {
+        return apiService.addCourse(subject, description)
     }
 }
