@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private val targetAdapter: TargetAdapter by lazy { TargetAdapter() }
+    private val targetAdapter: TargetAdapter by lazy { TargetAdapter(requireActivity()) }
 
     private val viewModel: HomeViewModel by viewModels()
 

@@ -42,3 +42,23 @@ fun String.yyyymmddFormat(): String {
         outputFormat.format(date)
     }
 }
+
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+fun String.toNumberDateFormat(): String {
+    return if (this.isEmpty()) this else {
+        val inputFormat = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        outputFormat.format(date)
+    }
+}
+
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+fun String.toLetterDateFormat(): String {
+    return if (this.isEmpty()) this else {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMMM y", Locale.getDefault())
+        val date = inputFormat.parse(this)
+        outputFormat.format(date)
+    }
+}

@@ -13,6 +13,8 @@ import com.babakbelur.studiary.core.utils.onFailure
 import com.babakbelur.studiary.core.utils.onSuccess
 import com.babakbelur.studiary.databinding.FragmentDetailBinding
 import com.babakbelur.studiary.presentation.base.BaseFragment
+import com.babakbelur.studiary.presentation.utils.toLetterDateFormat
+import com.babakbelur.studiary.presentation.utils.toNumberDateFormat
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +43,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                 binding.apply {
                     tvSubject.text = target.course[0].courseName
                     tvDescription.text = target.course[0].description
-                    tvDate.text = target.targetTime
+                    tvDate.text = target.targetTime?.toNumberDateFormat()?.toLetterDateFormat()
                     tvTargetScore.text = target.gradeTarget.toString()
 
                 }
