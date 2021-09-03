@@ -108,7 +108,7 @@ class AppRepository @Inject constructor(private val remoteDataSource: RemoteData
     ) {
         fetch {
             remoteDataSource.addTarget(
-                courseId,
+                userId,
                 courseId,
                 preTestScore,
                 targetScore,
