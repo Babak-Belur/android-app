@@ -43,34 +43,35 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints="@string/hint_email"
         android:background="@drawable/bg_et_rounded_black_border"
-        android:drawableStart="@drawable/ic_email_grey"
+        android:drawableStart="@drawable/ic_user_profile_grey"
         android:drawablePadding="16dp"
-        android:hint="@string/hint_email"
+        android:hint="@string/hint_username"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/et_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:autofillHints="password"
         android:background="@drawable/bg_et_rounded_black_border"
         android:drawableStart="@drawable/ic_padlock_grey"
         android:drawablePadding="16dp"
         android:inputType="textPassword"
+        android:hint="@string/hint_password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/et_username"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/et_username"
-        app:layout_constraintTop_toBottomOf="@+id/et_username" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/tv_forget_password"

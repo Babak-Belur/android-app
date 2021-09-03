@@ -50,6 +50,8 @@
                 android:id="@+id/rv_target"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/label_target_list"
@@ -70,13 +72,13 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="200dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/label_target_list"
-                app:lottie_fileName="empty-box.json" />
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="empty-box.json"
+                app:lottie_loop="true" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

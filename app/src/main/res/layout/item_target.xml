@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="16dp"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="10dp">
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,8 +44,8 @@
             style="@style/Theme.StudiAry.TextBody1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:maxLines="1"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_subjects"
             app:layout_constraintStart_toStartOf="@id/tv_subjects"
@@ -67,11 +67,11 @@
 
         <TextView
             android:id="@+id/label_days"
+            style="@style/Theme.StudiAry.TextBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Theme.StudiAry.TextBody2"
-            android:textColor="@color/purple_500"
             android:text="@string/label_days"
+            android:textColor="@color/purple_500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tv_total_days"
             app:layout_constraintHorizontal_bias="0.5"
