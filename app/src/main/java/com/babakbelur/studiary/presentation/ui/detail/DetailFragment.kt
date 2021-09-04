@@ -6,13 +6,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.babakbelur.studiary.R
 import com.babakbelur.studiary.core.data.ResultState
 import com.babakbelur.studiary.core.utils.onFailure
 import com.babakbelur.studiary.core.utils.onSuccess
 import com.babakbelur.studiary.databinding.FragmentDetailBinding
+import com.babakbelur.studiary.presentation.adapter.EvalAdapter
 import com.babakbelur.studiary.presentation.base.BaseFragment
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_TARGET_ID
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_USER_ID
 import com.babakbelur.studiary.presentation.utils.toLetterDateFormat
 import com.babakbelur.studiary.presentation.utils.toNumberDateFormat
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,8 +29,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
 
     private val navArgs: DetailFragmentArgs by navArgs()
 
+    private val evalAdapter: EvalAdapter by lazy { EvalAdapter() }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initRv()
 
         observeDetailTarget()
 
@@ -45,18 +54,64 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
                     tvDescription.text = target.course[0].description
                     tvDate.text = target.targetTime?.toNumberDateFormat()?.toLetterDateFormat()
                     tvTargetScore.text = target.gradeTarget.toString()
-
                 }
+                getAllUserEvaluations(navArgs.userId)
+                navigateToEvaluation(navArgs.userId, navArgs.targetId)
             }
 
             result.onFailure { throwable ->
-                Toast.makeText(requireActivity(), getString(R.string.error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), getString(R.string.error), Toast.LENGTH_SHORT)
+                    .show()
                 Log.e(DetailFragment::class.simpleName, throwable.message.toString())
             }
         }
     }
 
-    companion object {
-        const val ARG_TARGET_ID = "targetId"
+    private fun getAllUserEvaluations(userId: Int) {
+        viewModel.getALlUserEvaluations(userId)
+        viewModel.listUserEvaluations.observe(viewLifecycleOwner) { result ->
+
+            result.onSuccess { resultData ->
+                val eval = resultData.data
+
+                if (eval.evaluation.isNotEmpty()) {
+                    binding.lottieQuiz.isVisible = false
+                    evalAdapter.submitList(eval.evaluation)
+                    val evaluationId = eval.evaluation[eval.evaluation.lastIndex].idEvaluation
+                    observePredictedScore(evaluationId)
+                } else {
+                    binding.lottieQuiz.isVisible = true
+                }
+
+            }
+        }
+    }
+
+    private fun observePredictedScore(evaluationId: Int) {
+        viewModel.getPredictedScore(evaluationId)
+        viewModel.predictedScore.observe(viewLifecycleOwner) { result ->
+
+            result.onSuccess { resultData ->
+                val predict = resultData.data[0]
+                val predictedScore = predict.predictedScore * 100
+                binding.tvPredictedScore.text = predictedScore.toInt().toString()
+            }
+        }
+    }
+
+    private fun navigateToEvaluation(userId: Int, targetId: Int) {
+        binding.btnEval.setOnClickListener {
+            Bundle().run {
+                putInt(ARG_USER_ID, userId)
+                putInt(ARG_TARGET_ID, targetId)
+                findNavController().navigate(R.id.action_detailFragment_to_evaluationFragment, this)
+            }
+        }
+    }
+
+    private fun initRv() = binding.rvEval.apply {
+        adapter = evalAdapter
+        layoutManager = LinearLayoutManager(requireActivity())
+        setHasFixedSize(true)
     }
 }

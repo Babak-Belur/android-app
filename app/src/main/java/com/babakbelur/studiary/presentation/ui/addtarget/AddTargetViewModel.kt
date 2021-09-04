@@ -1,6 +1,5 @@
 package com.babakbelur.studiary.presentation.ui.addtarget
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -9,11 +8,9 @@ import com.babakbelur.studiary.R
 import com.babakbelur.studiary.core.domain.usecase.IAppUseCase
 import com.babakbelur.studiary.presentation.adapter.TestQuestionAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
-import kotlin.math.abs
 
 @HiltViewModel
 class AddTargetViewModel @Inject constructor(private val useCase: IAppUseCase) : ViewModel() {
@@ -27,11 +24,11 @@ class AddTargetViewModel @Inject constructor(private val useCase: IAppUseCase) :
 
     val listCourses = useCase.listCourses.asLiveData(viewModelScope.coroutineContext)
 
-    fun getAllCourses() = viewModelScope.launch {
+    fun getAllCourses() = viewModelScope.launch(Dispatchers.IO) {
         useCase.getAllCourses()
     }
 
-    fun addCourse(subject: String, description: String) = viewModelScope.launch {
+    fun addCourse(subject: String, description: String) = viewModelScope.launch(Dispatchers.IO) {
         useCase.addCourse(subject, description)
     }
 
@@ -41,20 +38,8 @@ class AddTargetViewModel @Inject constructor(private val useCase: IAppUseCase) :
         preTestScore: Int,
         targetScore: Int,
         targetTime: String,
-    ) = viewModelScope.launch {
+    ) = viewModelScope.launch(Dispatchers.IO) {
         useCase.addTarget(userId, courseId, preTestScore, targetScore, targetTime)
-    }
-
-    @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    fun calculateTotalDays(currentDay: String, selectedDay: String): Int {
-        val sdf = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
-        val currentDate = sdf.parse(currentDay)
-        val selectedDate = sdf.parse(selectedDay)
-        val difference = abs(currentDate.time - selectedDate.time)
-        val diffDays = difference / (24 * 60 * 60 * 1000)
-        val totalDays = diffDays.toInt()
-        Log.i("Test", "Total Days: $totalDays")
-        return totalDays
     }
 
     fun calculatePreTestScore(testAdapter: TestQuestionAdapter) {

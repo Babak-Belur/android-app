@@ -8,6 +8,7 @@ import com.babakbelur.studiary.R
 import com.babakbelur.studiary.core.domain.usecase.IAppUseCase
 import com.babakbelur.studiary.presentation.adapter.TestQuestionAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,13 +19,34 @@ class DetailViewModel @Inject constructor(private val useCase: IAppUseCase) : Vi
     val evalScore = _evalScore
 
     val detailTarget = useCase.detailTarget.asLiveData(viewModelScope.coroutineContext)
+
     val predictedScore = useCase.predictedScore.asLiveData(viewModelScope.coroutineContext)
 
-    fun getPredictedScore(evaluationId: Int) = viewModelScope.launch {
+    val listUserEvaluations =
+        useCase.listUserEvaluations.asLiveData(viewModelScope.coroutineContext)
+
+    val addEvaluation = useCase.addEvaluation.asLiveData(viewModelScope.coroutineContext)
+
+    fun addEvaluation(
+        userId: Int,
+        date: String,
+        evaluationScore: Int,
+        studyTime: Int,
+        freeTime: Int,
+        targetId: Int
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        useCase.addEvaluation(userId, date, evaluationScore, studyTime, freeTime, targetId)
+    }
+
+    fun getALlUserEvaluations(userId: Int) = viewModelScope.launch(Dispatchers.IO) {
+        useCase.getAllUserEvaluations(userId)
+    }
+
+    fun getPredictedScore(evaluationId: Int) = viewModelScope.launch(Dispatchers.IO) {
         useCase.getPredictedScore(evaluationId)
     }
 
-    fun getDetailTarget(targetId: Int) = viewModelScope.launch {
+    fun getDetailTarget(targetId: Int) = viewModelScope.launch(Dispatchers.IO) {
         useCase.getDetailTarget(targetId)
     }
 

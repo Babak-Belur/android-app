@@ -5,6 +5,8 @@ import com.babakbelur.studiary.core.data.remote.response.BaseAddResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseListResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseObjectResponse
 import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
+import com.babakbelur.studiary.core.data.remote.response.evaluation.DataEvaluationResponse
+import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
 import com.babakbelur.studiary.core.data.remote.response.predict.PredictResponse
 import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
 import com.babakbelur.studiary.core.data.remote.response.target.TargetItemResponse
@@ -67,5 +69,27 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) :
         description: String
     ): BaseAddResponse<CourseItemResponse> {
         return apiService.addCourse(subject, description)
+    }
+
+    override suspend fun getAllUserEvaluations(userId: Int): BaseObjectResponse<DataEvaluationResponse> {
+        return apiService.getAllUserEvaluations(userId)
+    }
+
+    override suspend fun addEvaluation(
+        userId: Int,
+        date: String,
+        evaluationScore: Int,
+        studyTime: Int,
+        freeTime: Int,
+        targetId: Int
+    ): BaseAddResponse<EvaluationItemResponse> {
+        return apiService.addEvaluation(
+            userId,
+            date,
+            evaluationScore,
+            studyTime,
+            freeTime,
+            targetId
+        )
     }
 }

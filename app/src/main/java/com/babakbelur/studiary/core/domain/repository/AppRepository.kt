@@ -25,6 +25,10 @@ class AppRepository @Inject constructor(private val remoteDataSource: RemoteData
     private val _addTarget: MutableStateFlow<ResultState<ResultAddModel<TargetItem>>> = idle()
     private val _addCourse: MutableStateFlow<ResultState<ResultAddModel<Course>>> = idle()
     private val _listCourses: MutableStateFlow<ResultState<ResultListModel<Course>>> = idle()
+    private val _listUserEvaluations: MutableStateFlow<ResultState<ResultModel<Evaluation>>> =
+        idle()
+    private val _addEvaluation: MutableStateFlow<ResultState<ResultAddModel<EvaluationItem>>> =
+        idle()
 
     override val signIn: StateFlow<ResultState<ResultModel<User>>> = _signIn
     override val signUp: StateFlow<ResultState<ResultAddModel<UserItem>>> = _signUp
@@ -34,6 +38,10 @@ class AppRepository @Inject constructor(private val remoteDataSource: RemoteData
     override val addTarget: StateFlow<ResultState<ResultAddModel<TargetItem>>> = _addTarget
     override val listCourses: StateFlow<ResultState<ResultListModel<Course>>> = _listCourses
     override val addCourse: StateFlow<ResultState<ResultAddModel<Course>>> = _addCourse
+    override val listUserEvaluations: StateFlow<ResultState<ResultModel<Evaluation>>> =
+        _listUserEvaluations
+    override val addEvaluation: StateFlow<ResultState<ResultAddModel<EvaluationItem>>> =
+        _addEvaluation
 
     override suspend fun signInRequest(username: String, password: String) {
         fetch {
@@ -144,6 +152,44 @@ class AppRepository @Inject constructor(private val remoteDataSource: RemoteData
             }
         }.collect { result ->
             _addCourse.value = result
+        }
+    }
+
+    override suspend fun getAllUserEvaluations(userId: Int) {
+        fetch {
+            remoteDataSource.getAllUserEvaluations(userId)
+        }.map { result ->
+            Mapper.mapResult(result) {
+                this.toResultModelOfEvaluation()
+            }
+        }.collect { result ->
+            _listUserEvaluations.value = result
+        }
+    }
+
+    override suspend fun addEvaluation(
+        userId: Int,
+        date: String,
+        evaluationScore: Int,
+        studyTime: Int,
+        freeTime: Int,
+        targetId: Int
+    ) {
+        fetch {
+            remoteDataSource.addEvaluation(
+                userId,
+                date,
+                evaluationScore,
+                studyTime,
+                freeTime,
+                targetId
+            )
+        }.map {  result ->
+            Mapper.mapResult(result) {
+                this.toResultAddModelOfListEvaluationItem()
+            }
+        }.collect { result ->
+            _addEvaluation.value = result
         }
     }
 

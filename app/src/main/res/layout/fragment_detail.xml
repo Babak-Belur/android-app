@@ -102,7 +102,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="16dp"
@@ -195,9 +195,40 @@
         android:layout_height="wrap_content"
         android:elevation="16dp"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label_eval"
+        style="@style/Theme.StudiAry.TextBody2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/evaluation"
+        app:layout_constraintStart_toStartOf="@id/label_subject"
+        app:layout_constraintTop_toBottomOf="@id/card_dashboard" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_eval"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_eval"
+        app:layout_constraintTop_toBottomOf="@id/label_eval"
+        tools:listitem="@layout/item_evaluation" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_quiz"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_eval"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="quiz.json"
+        app:lottie_loop="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

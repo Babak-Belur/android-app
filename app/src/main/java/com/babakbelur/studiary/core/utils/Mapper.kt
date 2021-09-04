@@ -5,6 +5,7 @@ import com.babakbelur.studiary.core.data.remote.response.BaseAddResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseListResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseObjectResponse
 import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
+import com.babakbelur.studiary.core.data.remote.response.evaluation.DataEvaluationResponse
 import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
 import com.babakbelur.studiary.core.data.remote.response.predict.PredictResponse
 import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
@@ -59,12 +60,20 @@ fun BaseObjectResponse<DataLoginResponse>.toResultModelOfUser(): ResultModel<Use
     return ResultModel(this.data.toUser())
 }
 
+fun BaseObjectResponse<DataEvaluationResponse>.toResultModelOfEvaluation(): ResultModel<Evaluation> {
+    return ResultModel(this.data.toEvaluation())
+}
+
 fun BaseAddResponse<DataUserResponse>.toResultAddModelOfListUserItem(): ResultAddModel<UserItem> {
     return ResultAddModel(this.data.toListUser())
 }
 
 fun BaseAddResponse<TargetItemResponse>.toResultAddModelOfListTargetItem(): ResultAddModel<TargetItem> {
     return ResultAddModel(this.data.toListTargetItem())
+}
+
+fun BaseAddResponse<EvaluationItemResponse>.toResultAddModelOfListEvaluationItem(): ResultAddModel<EvaluationItem> {
+    return ResultAddModel(this.data.toListEvaluationItem())
 }
 
 fun BaseAddResponse<CourseItemResponse>.toResultAddModelOfListCourse(): ResultAddModel<Course> {
@@ -92,6 +101,14 @@ fun PredictResponse.toPredict() = Predict(
 )
 
 fun TargetResponse.toResultTarget() = ResultTarget(data.toListTargetItem())
+
+fun DataEvaluationResponse.toEvaluation() = Evaluation(
+    evaluation = this.evaluation.toListEvaluationItem(),
+    idUser = this.idUser,
+    name = this.name,
+    role = this.role,
+    username = this.username
+)
 
 fun DataTargetResponse.toTarget() = Target(
     idUser = this.idUser,
@@ -141,7 +158,8 @@ fun TargetItem.toTargetItemResponse() = TargetItemResponse(
     gradeTarget = this.gradeTarget,
     idCourse = this.idCourse,
     idTarget = this.idTarget,
-    targetTime = this.targetTime
+    targetTime = this.targetTime,
+    idUser = this.idUser
 )
 
 fun EvaluationItem.toEvaluationItemResponse() = EvaluationItemResponse(
@@ -219,7 +237,8 @@ fun List<TargetItem>.toListTargetItemResponse(): List<TargetItemResponse> {
             gradeTarget = it.gradeTarget,
             idCourse = it.idCourse,
             idTarget = it.idTarget,
-            targetTime = it.targetTime
+            targetTime = it.targetTime,
+            idUser = it.idUser
         )
         data.add(targetItem)
     }
@@ -236,7 +255,8 @@ fun List<TargetItemResponse>.toListTargetItem(): List<TargetItem> {
             gradeTarget = it.gradeTarget,
             idCourse = it.idCourse,
             idTarget = it.idTarget,
-            targetTime = it.targetTime
+            targetTime = it.targetTime,
+            idUser = it.idUser
         )
         data.add(targetItem)
     }

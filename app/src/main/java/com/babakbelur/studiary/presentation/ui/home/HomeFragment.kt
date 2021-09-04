@@ -16,10 +16,10 @@ import com.babakbelur.studiary.core.utils.onSuccess
 import com.babakbelur.studiary.databinding.FragmentHomeBinding
 import com.babakbelur.studiary.presentation.adapter.TargetAdapter
 import com.babakbelur.studiary.presentation.base.BaseFragment
-import com.babakbelur.studiary.presentation.ui.addtarget.AddTargetFragment.Companion.ARG_USER_ID
-import com.babakbelur.studiary.presentation.ui.detail.DetailFragment.Companion.ARG_TARGET_ID
 import com.babakbelur.studiary.presentation.ui.home.MainActivity.Companion.EXTRA_NAME
 import com.babakbelur.studiary.presentation.ui.home.MainActivity.Companion.EXTRA_USER_ID
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_TARGET_ID
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_USER_ID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -89,6 +89,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         targetAdapter.onItemClick = { targetItem ->
             Bundle().run {
                 putInt(ARG_TARGET_ID, targetItem.idTarget)
+                putInt(ARG_USER_ID, userId!!)
                 findNavController().navigate(R.id.action_homeFragment_to_detailFragment, this)
             }
         }

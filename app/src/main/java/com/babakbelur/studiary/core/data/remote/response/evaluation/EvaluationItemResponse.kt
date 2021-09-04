@@ -20,5 +20,5 @@ data class EvaluationItemResponse(
     val studyTime: String? = "",
 
     @SerializedName("target")
-    val target: List<TargetItemResponse>
+    val target: List<TargetItemResponse> = emptyList()
 )

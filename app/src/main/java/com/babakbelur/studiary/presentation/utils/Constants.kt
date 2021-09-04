@@ -5,6 +5,16 @@ import com.babakbelur.studiary.core.domain.model.TestQuestion
 
 object Constants {
 
+    const val ARG_TARGET_ID = "targetId"
+
+    const val ARG_USER_ID = "userId"
+
+    const val ARG_TARGET_TIME = "targetTime"
+
+    const val ARG_TARGET_SCORE = "targetScore"
+
+    const val ARG_COURSE_ID = "courseId"
+
     val LIST_QUESTIONS = listOf(
         TestQuestion(
             question = "1. Nilai x yang memenuhi 8^(3x+1)=128^(x-1) adalah...",

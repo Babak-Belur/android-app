@@ -42,4 +42,13 @@
     <string name="label_select_course">Select Course</string>
     <string name="error_add_target">Failed to Submit!</string>
     <string name="hint_password">Password</string>
+    <string name="label_free_time">Free Time: </string>
+    <string name="label_study_time">Study Time:</string>
+    <string name="_2_h"><![CDATA[<2 Hours]]></string>
+    <string name="_2_5_hours">2-5 Hours</string>
+    <string name="_5_10_hours">5-10 Hours</string>
+    <string name="_10_hours"><![CDATA[>10 Hours]]></string>
+    <string name="_5_8_hours">5-8 Hours</string>
+    <string name="_8_15_hours">8-15 Hours</string>
+    <string name="_15_hours"><![CDATA[>15 Hours]]></string>
 </resources>

@@ -33,6 +33,12 @@ class AppInteractors @Inject constructor(private val appRepository: IAppReposito
     override val listCourses: StateFlow<ResultState<ResultListModel<Course>>>
         get() = appRepository.listCourses
 
+    override val listUserEvaluations: StateFlow<ResultState<ResultModel<Evaluation>>>
+        get() = appRepository.listUserEvaluations
+
+    override val addEvaluation: StateFlow<ResultState<ResultAddModel<EvaluationItem>>>
+        get() = appRepository.addEvaluation
+
     override suspend fun signInRequest(username: String, password: String) {
         return appRepository.signInRequest(username, password)
     }
@@ -69,5 +75,27 @@ class AppInteractors @Inject constructor(private val appRepository: IAppReposito
 
     override suspend fun addCourse(subject: String, description: String) {
         return appRepository.addCourse(subject, description)
+    }
+
+    override suspend fun getAllUserEvaluations(userId: Int) {
+        return appRepository.getAllUserEvaluations(userId)
+    }
+
+    override suspend fun addEvaluation(
+        userId: Int,
+        date: String,
+        evaluationScore: Int,
+        studyTime: Int,
+        freeTime: Int,
+        targetId: Int
+    ) {
+        return appRepository.addEvaluation(
+            userId,
+            date,
+            evaluationScore,
+            studyTime,
+            freeTime,
+            targetId
+        )
     }
 }

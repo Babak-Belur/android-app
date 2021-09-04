@@ -15,6 +15,8 @@ interface IAppRepository {
     val addTarget: StateFlow<ResultState<ResultAddModel<TargetItem>>>
     val listCourses: StateFlow<ResultState<ResultListModel<Course>>>
     val addCourse: StateFlow<ResultState<ResultAddModel<Course>>>
+    val listUserEvaluations: StateFlow<ResultState<ResultModel<Evaluation>>>
+    val addEvaluation: StateFlow<ResultState<ResultAddModel<EvaluationItem>>>
 
     suspend fun signInRequest(username: String, password: String)
 
@@ -37,5 +39,16 @@ interface IAppRepository {
     suspend fun getAllCourses()
 
     suspend fun addCourse(subject: String, description: String)
+
+    suspend fun getAllUserEvaluations(userId: Int)
+
+    suspend fun addEvaluation(
+        userId: Int,
+        date: String,
+        evaluationScore: Int,
+        studyTime: Int,
+        freeTime: Int,
+        targetId: Int
+    )
 
 }

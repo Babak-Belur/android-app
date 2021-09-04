@@ -5,6 +5,7 @@ import com.babakbelur.studiary.core.data.remote.response.BaseDeleteResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseListResponse
 import com.babakbelur.studiary.core.data.remote.response.BaseObjectResponse
 import com.babakbelur.studiary.core.data.remote.response.course.CourseItemResponse
+import com.babakbelur.studiary.core.data.remote.response.evaluation.DataEvaluationResponse
 import com.babakbelur.studiary.core.data.remote.response.evaluation.EvaluationItemResponse
 import com.babakbelur.studiary.core.data.remote.response.predict.PredictResponse
 import com.babakbelur.studiary.core.data.remote.response.target.DataTargetResponse
@@ -71,14 +72,25 @@ interface ApiService {
 
 
     //Endpoint Evaluation
-    @GET("evaluation/user/{id}")
-    suspend fun getEvaluationById(
-        @Path("id") userId: Int
+    @GET("evaluation/{id}")
+    suspend fun getDetailEvaluation(
+        @Path("id") evaluationId: Int
     ): BaseObjectResponse<EvaluationItemResponse>
 
+    @GET("evaluation/user/{id}")
+    suspend fun getAllUserEvaluations(
+        @Path("id") userId: Int
+    ): BaseObjectResponse<DataEvaluationResponse>
+
+    @FormUrlEncoded
     @POST("evaluation")
     suspend fun addEvaluation(
-        @Body evaluation: EvaluationItemResponse
+        @Field("id_user") userId: Int,
+        @Field("date") date: String,
+        @Field("grade") evaluationScore: Int,
+        @Field("study_time") studyTime: Int,
+        @Field("freetime") freeTime: Int,
+        @Field("id_target") targetId: Int
     ): BaseAddResponse<EvaluationItemResponse>
 
     @DELETE("evaluation/{id}")

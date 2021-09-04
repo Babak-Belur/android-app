@@ -15,11 +15,11 @@ import com.babakbelur.studiary.core.utils.onFailure
 import com.babakbelur.studiary.core.utils.onSuccess
 import com.babakbelur.studiary.databinding.FragmentAddTargetBinding
 import com.babakbelur.studiary.presentation.base.BaseFragment
-import com.babakbelur.studiary.presentation.ui.addtarget.PreTestFragment.Companion.ARG_COURSE_ID
-import com.babakbelur.studiary.presentation.ui.addtarget.PreTestFragment.Companion.ARG_TARGET_SCORE
-import com.babakbelur.studiary.presentation.ui.addtarget.PreTestFragment.Companion.ARG_TARGET_TIME
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_COURSE_ID
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_TARGET_SCORE
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_TARGET_TIME
+import com.babakbelur.studiary.presentation.utils.Constants.ARG_USER_ID
 import com.babakbelur.studiary.presentation.utils.ddMMMMyFormat
-import com.babakbelur.studiary.presentation.utils.ddMMMMyyyyFormat
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -33,9 +33,7 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
 
     private val args: AddTargetFragmentArgs by navArgs()
 
-    private var totalDays: Int = 0
     private var targetScore: Int = 0
-    private var currentDay: String = ""
     private var selectedDay: String = ""
 
     @Inject
@@ -73,13 +71,11 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
         } else {
             binding.tvDate.text = selectedDay.ddMMMMyFormat()
         }
-        currentDay = calendar.time.ddMMMMyyyyFormat()
     }
 
     private fun selectTargetScore() {
         val score = binding.etTargetScore.text.toString()
         targetScore = score.toInt()
-        Log.i("Test", "Target Score: $targetScore")
     }
 
     private fun selectDate() {
@@ -156,7 +152,6 @@ class AddTargetFragment : BaseFragment<FragmentAddTargetBinding>(FragmentAddTarg
 
     companion object {
         private const val DATE_PICKER_TAG = "DatePicker"
-        const val ARG_USER_ID = "userId"
     }
 
 }

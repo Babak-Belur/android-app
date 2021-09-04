@@ -85,10 +85,4 @@ class PreTestFragment : BaseFragment<FragmentPreTestBinding>(FragmentPreTestBind
         testAdapter.submitList(LIST_QUESTIONS)
     }
 
-    companion object {
-        const val ARG_TARGET_TIME = "targetTime"
-        const val ARG_TARGET_SCORE = "targetScore"
-        const val ARG_COURSE_ID = "courseId"
-    }
-
 }
